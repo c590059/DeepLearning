@@ -1,1 +1,20 @@
 test
+0219
+coding:
+from transformers import pipeline, 集成很多NLP任务的工具（文本分类、零样本分类、文本生成、文本概括等等）
+theory：
+transformers的核心：encoder-decoder architecture
+  encoder：
+    输入文本，输出feature vector，能根据每个词的上下文语境输出合适的numerical representation
+    关注上下文bidirectional, thanks to self-attention mechanism（自注意力机制）
+    能很好解决MLM(masked language modeling)问题、文本分类问题
+    经典的encdoer-only模型：BERT（vector dimension = 768），用MLM预训练
+  decoder：
+    输入文本，输出feature vector，根据每个词的前文输出合适的numerical representation
+    unidirectional，关注单向的前文（或后文），会把另一边的context mask掉，即masked self-attention mechanism
+    很好解决CLM问题（Causal language modeling），如文本生成
+      my -> name
+      my name -> is
+      my name is -> zach
+      ——把自己的前步输出作为后续输入的模型：自回归模型（auto-regressive model）
+    经典的decoder-only模型：GPT（max context size = 1024）
